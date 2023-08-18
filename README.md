@@ -3,6 +3,7 @@ Our goal is to provide a platform that can explain malware, specifically, to out
 
 ![image](https://github.com/X-MalChain/projects/assets/141179257/3526469e-1526-4702-8df1-aea4716c4620)
 
+## Specification
 
 
 ## Project setup

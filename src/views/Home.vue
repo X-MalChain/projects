@@ -27,42 +27,46 @@
         <el-row :gutter="10" v-show='if_upload'>
           <!--第1列-->
           <el-col :span="8">
-            <el-card style="width: 380px;height:190px">
-              <div slot="header" style="font-size: 16px;font-family: 'Trebuchet MS', sans-serif;">
-                <span>APK Basic Information</span>
-              </div>
-              <div style="font-size: 12px;text-align: left;">
-                <p>APK Name: TestMalware</p>
-                <p>File Size: 12M</p>
-                <p>SDK Level: Android 9</p>
-                <p>Release Date: 2018-08-06</p>
-              </div>
-            </el-card>
+            <div id="mycard">
+              <el-card style="width: 380px;height:190px">
+                <div slot="header" style="font-size: 16px;font-family: 'Trebuchet MS', sans-serif;">
+                  <span><i class="el-icon-s-order"> APK Basic Information</i></span>
+                </div>
+                <div style="font-size: 12px;text-align: left;">
+                  <p><b>APK Name</b>: TestMalware</p>
+                  <p><b>File Size</b>: 12M</p>
+                  <p><b>SDK Level</b>: Android 9</p>
+                  <p><b>Release Date</b>: 2018-08-06</p>
+                </div>
+              </el-card>
 
-            <el-card style="width: 380px;height:310px;margin-top: 10px;">
-              <div slot="header" style="font-size: 16px;font-family: 'Trebuchet MS', sans-serif;">
-                <span>Key Features</span>
-              </div>
-              <div style="font-size: 12px;text-align: left;">
-                <p style="font-family: 'Trebuchet MS', sans-serif;font-size:14px">Permissions:</p>
-                <span style="white-space: pre-wrap;">permission.READ_SMS<br />permission.INTERNET<br />
-                </span>
+              <el-card style="width: 380px;height:310px;margin-top: 10px;">
+                <div slot="header" style="font-size: 16px;font-family: 'Trebuchet MS', sans-serif;">
+                  <span>Key Features</span>
+                </div>
+                <div style="font-size: 12px;text-align: left;">
+                  <p style="font-family: 'Trebuchet MS', sans-serif;font-size:14px">Permissions:</p>
+                  <span
+                    style="white-space: pre-wrap;">android.permission.INTERNET<br />android.permission.RECEIVE_SMS<br />android.permission.READ_SMS<br />android.permission.READ_EXTERNAL_STORAGE
+                  </span>
 
-                <p style="font-family: 'Trebuchet MS', sans-serif;font-size: 14px;">API calls:</p>
-                <span style="white-space: pre-wrap;">permission.READ_SMS<br />permission.INTERNET<br />
-                </span>
-              </div>
-              <!-- <div v-for="o in 4" :key="o" class="text item">
+                  <p style="font-family: 'Trebuchet MS', sans-serif;font-size: 14px;">API calls:</p>
+                  <span
+                    style="white-space: pre-wrap;">java.net.URL;->openConnection<br />android.app.DownloadManager;->enqueue<br />android.content.Intent;->setDataAndType</br />android.content.pm.PackageManager;->setComponentEnabledSetting<br />android.content.BroadcastReceiver;->abortBroadcast
+                  </span>
+                </div>
+                <!-- <div v-for="o in 4" :key="o" class="text item">
               {{'列表内容 ' + o }}
             </div> -->
-            </el-card>
+              </el-card>
+            </div>
           </el-col>
 
           <!--第2列-->
           <el-col :span="8">
             <el-card style="width:400px;height: 510px;">
               <div slot="header" style="font-size: 16px;font-family: 'Trebuchet MS', sans-serif;">
-                <span>Malicious Behavior Chains</span>
+                <span><i class="el-icon-s-opportunity"> Malicious Behavior Chains</i></span>
               </div>
               <div style="width: 400px;height: 95px;margin:0px;font-size: 12px;text-align: left;">
                 <div style="float: left;">
@@ -98,9 +102,9 @@
           <el-col :span="8">
             <el-card style="width: 380px;height:510px;margin-left: 20px;">
               <div slot="header" style="font-size: 16px;font-family: 'Trebuchet MS', sans-serif;">
-                <span>Malicious Behavior Description</span>
+                <span><i class="el-icon-s-comment"> Malicious Behavior Description</i></span>
               </div>
-              <div id="feature" style="width: 380px;height: 95px;">
+              <div id="node" style="width: 380px;height: 95px;">
               </div>
               <el-divider><i class="el-icon-d-caret"></i></el-divider>
               <div style="width: 340px;height: 430px;margin:0px;font-size: 12px;text-align: justify;">
@@ -172,7 +176,7 @@
         nodeY: [1, 2, 2, 4],
         featureX: ["Download", "Read SMS", "Block broadcast", "Access the Internet"],
         featureY: [1, 2, 2, 4],
-
+        nodeMapBar: null,
       }
     },
 
@@ -180,7 +184,7 @@
     mounted() {
       // this.if_upload = false
       this.initG6()
-      this.featureMap()
+      // this.featureMap()
       this.nodeMap()
     },
     methods: {
@@ -258,7 +262,7 @@
         };
         const graph = new G6.Graph({
           container: 'mountNode',
-          width: 320,
+          width: 360,
           height: 300,
           fitView: true,
           modes: {
@@ -275,7 +279,7 @@
             labelCfg: {
               style: {
                 fill: "black",
-                fontSize: 10
+                fontSize: 12
               }
             }
           },
@@ -344,62 +348,34 @@
       // KG上节点的映射结果
       this.nodeMapBar = echarts.init(document.getElementById('node'));
       this.nodeMapBar.setOption({
-        title: {
-          text: 'Node Map',
-          textStyle: {
-            fontSize: 14
-          }
-        },
-        tooltip: {},
         xAxis: {
+          type: 'category',
           label: {
             show: true,
             position: 'top',
           },
-          // data: ['S1', 'S2', 'S3', 'S4', 'S5', 'S6'],
-          data: this.nodeX,
+          data: ["Download", "Read SMS", "Block broadcast", "Access the Internet"],
+          // data: this.nodeX,
           axisTick: {
             show: false
           },
           axisLine: {
             show: true,
           },
-          axisLabel: {
-            interval: 0,
-            rotate: 45,
-            textStyle: {
-              fontSize: '10',
-              itemSize: ''
-            }
-          },
         },
-        yAxis: {},
+        yAxis: {
+          type: 'value'
+        },
         series: [
           {
             // name: 'sales',
             type: 'bar',
-            itemStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                { offset: 0, color: '#83bff6' },
-                { offset: 0.5, color: '#188df0' },
-                { offset: 1, color: '#188df0' }
-              ])
-            },
-            emphasis: {
-              itemStyle: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                  { offset: 0, color: '#2378f7' },
-                  { offset: 0.7, color: '#2378f7' },
-                  { offset: 1, color: '#83bff6' }
-                ])
-              }
-            },
             label: {
               show: true,
               position: 'top',
             },
-            // data: [0, 0, 12, 106, 271, 351],
-            data: this.nodeY
+            data: [1, 2, 2, 4],
+            // data: this.nodeY
           }
         ]
       });
@@ -420,7 +396,7 @@
     margin-bottom: 14px;
   }
 
-  /* >>>.el-card>.el-card_body {
+  >>>#mycard .el-card .el-card__body {
     padding: 10px !important;
-  } */
+  }
 </style>

@@ -3,6 +3,7 @@
     <el-row>
       <div id="mountNode"></div>
     </el-row>
+    <div id="node" style="width: 500px;height:500px;"></div>
   </div>
 </template>
 
@@ -10,8 +11,14 @@
   import G6 from '@antv/g6';
 
   export default {
+    data() {
+      return {
+        nodeMapBar: null
+      }
+    },
     mounted() {
       this.initG6()
+      this.nodeMap()
     },
     methods: {
       initG6() {
@@ -61,7 +68,43 @@
         });
         graph.data(data);
         graph.render();
-      }
+      },
+      nodeMap() {
+        // KG上节点的映射结果
+        this.nodeMapBar = echarts.init(document.getElementById('node'));
+        this.nodeMapBar.setOption({
+          xAxis: {
+            type: 'category',
+            label: {
+              show: true,
+              position: 'top',
+            },
+            data: ["Download", "Read SMS", "Block broadcast", "Access the Internet"],
+            // data: this.nodeX,
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: true,
+            },
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              // name: 'sales',
+              type: 'bar',
+              label: {
+                show: true,
+                position: 'top',
+              },
+              data: [1, 2, 2, 4],
+              // data: this.nodeY
+            }
+          ]
+        });
+      },
     }
   }
 </script>

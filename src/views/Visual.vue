@@ -2,7 +2,7 @@
   <div>
     <div id="feature" style="width: 1400px;height: 400px;">
     </div>
-    <div id="node" style="width: 1400px;height: 400px;">
+    <div id="node" style="width: 300px;height: 150px;">
     </div>
   </div>
 
@@ -117,7 +117,7 @@
       this.nodeX, this.nodeY = this.readDataByOrder(this.datasetNode)
       console.log('node x:', this.nodeX)
       console.log('node y:', this.nodeY)
-      this.nodeMap()
+      this.nodeMap1()
     },
     methods: {
       readData(dict) {
@@ -308,7 +308,43 @@
             }
           ]
         });
-      }
+      },
+      nodeMap1() {
+        // KG上节点的映射结果
+        this.nodeMapBar = echarts.init(document.getElementById('node'));
+        this.nodeMapBar.setOption({
+          xAxis: {
+            type: 'category',
+            label: {
+              show: true,
+              position: 'top',
+            },
+            data: ["Download", "Read SMS", "Block broadcast", "Access the Internet"],
+            // data: this.nodeX,
+            axisTick: {
+              show: false
+            },
+            axisLine: {
+              show: true,
+            },
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              // name: 'sales',
+              type: 'bar',
+              label: {
+                show: true,
+                position: 'top',
+              },
+              data: [1, 2, 2, 4],
+              // data: this.nodeY
+            }
+          ]
+        });
+      },
     }
   }
 </script>

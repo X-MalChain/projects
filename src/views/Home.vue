@@ -143,7 +143,7 @@
           'pathaction': ['Listen to SMS', 'Block broadcast', 'Read SMS', 'Leak SMS'],
           'pathlist': ''
         },
-        if_upload: false,
+        if_upload: true,
         behaviors: [{
           action: 'Listen to SMS',
           level: 'sensitive'

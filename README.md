@@ -14,7 +14,7 @@ Afterwards, X-MalChain will analyze the given malware and output its basic infor
 
 
 ## Project setup
-Note that, <font color=#b7dee2>_**our website is being publicly deployed**_</font> (due to server and domain name considerations). Prior to this, you can deploy the project to your local machine using the following commands:
+Note that, <font color=#b7dee2>_**our website is being publicly deployed**_</font> (due to server and domain name considerations). Prior to this, you can deploy the project to your local machine using the following commands. However, please make sure you have [Node.js](https://nodejs.org/en) and [Vue.js](https://cn.vuejs.org/) installed on your computer.
 ### Install
 ```
 npm install

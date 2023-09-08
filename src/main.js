@@ -12,7 +12,7 @@ import './assets/css/global.css'
 Vue.config.productionTip = false
 
 // 配置axios默认的请求路径
-axios.defaults.baseURL = 'http://172.26.204.238:8888'
+axios.defaults.baseURL = 'http://172.23.97.102:8888'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 axios.defaults.withCredentials = true
 // 全局注册，使用方法为 this.axios
